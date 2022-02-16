@@ -6,23 +6,23 @@
 {% block content %} 
 
 <div class="mk-container form-wrapper">
-  <form method="post">
+  <form id="create-snippet-form">
     <h2 class="mb-5 font-weight-bold">Create A Snippet</h2>
     
     <h4 class="mb-3 font-weight-bold">New Snippet</h4>
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title for Snippet" spellcheck="false" required>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title for Snippet" spellcheck="false" >
     </div>
     <div class="form-group">
       <label for="snippet">Your Snippet</label>
-      <textarea type="password" class="form-control" id="snippet" name="snippet" rows="15" placeholder="Write/Paste your Snippet" spellcheck="false" required></textarea>
+      <textarea type="password" class="form-control" id="snippet" name="snippet" rows="15" placeholder="Write/Paste your Snippet" spellcheck="false"></textarea>
     </div>
 
     <h4 class="mt-5 mb-4 font-weight-bold">Snippet Configuration</h4>
     <div class="form-group w-50">
       <label for="expiry">Snippet Expiry</label>
-      <select id="expiry" class="form-control">
+      <select id="expiry" name="expiry" class="form-control">
         <option selected>Never</option>
         <option>1 day</option>
       </select>
@@ -30,7 +30,7 @@
 
     <div class="form-group">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="encryption">
+        <input class="form-check-input" type="checkbox" id="encryption" name="encryption">
         <label class="form-check-label" for="encryption">
           Set Encrytion
         </label>
@@ -41,36 +41,13 @@
       <label for="encryption-key">Encryption Key</label>
       <input type="text" class="form-control" id="encryption-key" name="encryption-key" placeholder="Enter Encryption Key" spellcheck="false">
     </div>
-    <button type="submit" class="btn btn-primary"  style="width:200px; padding: 0.7rem 1rem">CREATE NEW SNIPPET</button>
+    <button type="submit" class="btn btn-primary d-flex justify-content-center form-submit"  style="width:250px; padding: 0.7rem 1rem;">
+      <span>CREATE NEW SNIPPET</span>
+      <div class="spinner"></div>
+    </button>
   </form>
 </div>
 
-<script>
-  const encryptionCheckBox = document.getElementById('encryption');
-  const encryptionInputField = document.querySelector('.encryption-key-div');
-
-  const makeRandomID = function (length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    
-    for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
-  charactersLength));
-    }
-
-    return result;
-  }
-
-  const handleEncryptionInputField = (activate) => {
-    encryptionInputField.querySelector("#encryption-key").value = makeRandomID(32);
-    activate ? encryptionInputField.classList.add('show') :  encryptionInputField.classList.remove('show');
-  }
-
-  encryptionCheckBox.addEventListener('click', () => {
-    if (encryptionCheckBox.checked) handleEncryptionInputField(true);
-    else handleEncryptionInputField(false);
-  })
-</script>
+<script type="module" src="{% static 'js/c_snippet.js' %}?{% now 'U' %}"></script>
 
 {% endblock content %}

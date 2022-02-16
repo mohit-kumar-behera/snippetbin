@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('auth/', include('account.urls')),
-    path('snippet/', include('snippet.urls'))
+    path('snippet/', include('snippet.urls')),
+    path('api/snippet/', include('snippet.api.urls')),
 ]
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
