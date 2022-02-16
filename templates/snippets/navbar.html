@@ -1,0 +1,16 @@
+{% load static %}
+
+<nav class="navbar">
+  <div class="navcontent left-grid">
+    <a href="#" class="navlink logo">SnippetBin</a>
+    <a href="#" class="navlink button snippet-btn"><i class="fa fa-plus"></i> SNIPPET</a>
+  </div>
+  <div class="navcontent right-grid">
+    {% if not request.user %}
+      <a href="#" class="navlink button user-btn"><i class="fa fa-user"></i> USER</a>
+    {% else %}
+      <a href="#" class="navlink button signin-btn">LOG IN</a>
+      <a href="#" class="navlink button-fill signup-btn">SIGN UP</a>
+    {% endif %}
+  </div>
+</nav>

@@ -1,0 +1,11 @@
+<div class="footer">
+  <div class="copyright--div">
+    <p><span>&copy; <span class="start-year">2021</span>-<span class="curr-year"></span></span> 
+			<a href="{% url 'home:home' %}" class="footerlink">Mohit Kumar</a>
+		</p>
+  </div>
+</div>
+<script type="text/javascript">
+  const year = new Date().getFullYear() + '';
+  document.querySelector('.footer .curr-year').textContent = year.slice(2);
+</script> 
