@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>Dashboard | SnippetBin</title>{% endblock title %} 
+
+{% block content %} 
+
+<div class="mk-container">
+  <div class="snippet-card" style="width:90%">
+    <div class="card-left-content">
+      <div class="upper-content">
+        <h4>{{ user.name }}</h4>
+      </div>
+      <div class="lower-content">
+        <span>{{ user.email }}</span>
+      </div>
+    </div>
+    <div class="card-right-content">
+      <a style="color: lightgrey"><small>Joined on {{ user.date_joined|date:"M d, Y" }}</small></a>
+    </div>
+  </div>
+</div>
+
+{% if not is_other_user %}
+<div class="mk-container">
+  <div class="profile-statistics-wrapper">
+    <h4 class=""font-weight-bolder>Your Stats</h4>
+    <ul class="stats">
+      <li class="stats-item">
+        <span class="key">Total number of active pastes</span>
+        <span class="val">0</span>
+      </li>
+
+      <li class="stats-item">
+        <span class="key">Total number of active pastes</span>
+        <span class="val">0</span>
+      </li>
+
+      <li class="stats-item">
+        <span class="key">Total number of active pastes</span>
+        <span class="val">0</span>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+<div class="mk-container">
+  <div class="snippets-wrapper">
+    <h1 class="text-center">User Snippets</h1>
+
+    <div class="snippet-card">
+      <div class="card-left-content">
+        <div class="upper-content">
+          <a href="#" class="snippet-title">This is Title</a>
+        </div>
+        <div class="lower-content">
+          <span>mohitkumar124927</span>
+          <span>12 hrs ago</span>
+        </div>
+      </div>
+      {% if not is_other_user %}
+        <div class="card-right-content">
+          <a href="#"><i class="fa fa-pencil"></i></a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="snippet-card">
+      <div class="card-left-content">
+        <div class="upper-content">
+          <a href="#" class="snippet-title">This is Title</a>
+        </div>
+        <div class="lower-content">
+          <span>mohitkumar124927</span>
+          <span>12 hrs ago</span>
+        </div>
+      </div>
+      {% if not is_other_user %}
+        <div class="card-right-content">
+          <a href="#"><i class="fa fa-pencil"></i></a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

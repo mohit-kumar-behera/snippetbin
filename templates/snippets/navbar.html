@@ -7,7 +7,7 @@
   </div>
   <div class="navcontent right-grid">
     {% if request.user.is_authenticated %}
-      <a href="#" class="navlink button"><i class="fa fa-user"></i> USER</a>
+      <a href="{% url 'home:dashboard' request.user.username %}" class="navlink button"><i class="fa fa-user"></i> USER</a>
       <a href="{% url 'account:logout' %}" class="navlink button-fill">LOG OUT</a>
     {% else %}
       <a href="{% url 'account:login' %}" class="navlink button">LOG IN</a>

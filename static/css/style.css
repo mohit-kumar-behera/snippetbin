@@ -247,3 +247,28 @@ input.form-control {
 .encryption-key-div.show {
   display: block;
 }
+
+.profile-statistics-wrapper {
+  width: 90%;
+  margin: auto;
+  background-color: var(--blue);
+  border-radius: 3px;
+  padding: 1rem;
+  color: var(--grey);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.stats {
+  margin-top: 2rem;
+  list-style-type: none;
+  padding-left: 0;
+}
+.stats-item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.stats-item > .key::after {
+  content: ' : ';
+}
