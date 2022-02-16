@@ -68,6 +68,64 @@ a.button-fill:hover {
   -webkit-filter: brightness(110%);
 }
 
+/* MESSAGES */
+.messages {
+  position: fixed;
+  top: 0;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  padding: 0;
+  display: none;
+  z-index: 9;
+  animation: moveDown 0.4s ease-in forwards;
+}
+@keyframes moveDown {
+  to {
+    top: 5.5em;
+    opacity: 1;
+  }
+}
+.messages.show {
+  display: block;
+}
+.messages .message {
+  margin-left: 0;
+  list-style: none;
+  background-color: antiquewhite;
+  padding: 1em;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 97% 3%;
+  grid-column-gap: 0.4em;
+  color: #fff;
+  font-size: 1.2em;
+}
+.messages .message:not(:last-child) {
+  margin-bottom: 1em;
+}
+.messages .message > .close {
+  color: var(--white);
+  text-align: center;
+  align-self: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.messages .message.warning {
+  background-color: #ffc107;
+  color: #000;
+}
+.messages .message.success {
+  background-color: #28a745;
+}
+.messages .message.error {
+  background-color: #dc3545;
+}
+.messages .message.info {
+  background-color: #17a2b8;
+}
+
 .navbar {
   background-color: var(--dark-purple);
   padding: 2.5em 3rem;
@@ -167,11 +225,20 @@ input.form-control {
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
 }
-
 .card-right-content > a > i {
   font-size: 1.5rem;
+  filter: brightness(80%);
+  transition: all 0.2s ease;
+  -webkit-filter: brightness(80%);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
 }
-
+.card-right-content > a > i:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
 .encryption-key-div {
   display: none;
 }
