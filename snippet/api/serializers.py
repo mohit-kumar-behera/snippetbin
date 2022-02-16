@@ -28,7 +28,16 @@ class SnippetSerializer(serializers.ModelSerializer):
       """ WITHIN 24 HOURS """
       curr_hour = int(now.strftime('%H'))
       created_at_hour = int(created_at.strftime('%H'))
-      result = f'{curr_hour - created_at_hour} hour ago'
+      diff = curr_hour - created_at_hour
+      type = 'hour'
+      
+      if diff == 0:
+        curr_min = int(now.strftime('%M'))
+        created_at_min = int(created_at.strftime('%M'))
+        diff = curr_min - created_at_min
+        type = 'min'
+
+      result = f'{diff} {type} ago' if diff > 0 else 'few sec ago'
     else:
       result = created_at.strftime("%b %d, %Y %H:%M:%S")
     return result

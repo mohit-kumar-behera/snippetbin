@@ -6,54 +6,10 @@
 {% block content %} 
 
 <div class="mk-container">
-  <div class="snippets-wrapper">
-    <h1 class="text-center">Public Snippets</h1>
-
-    <div class="snippet-card">
-      <div class="card-left-content">
-        <div class="upper-content">
-          <a href="#" class="snippet-title">This is Title</a>
-        </div>
-        <div class="lower-content">
-          <span>mohitkumar124927</span>
-          <span>12 hrs ago</span>
-        </div>
-      </div>
-      <div class="card-right-content">
-        <a href="#"><i class="fa fa-pencil"></i></a>
-      </div>
-    </div>
-
-    <div class="snippet-card">
-      <div class="card-left-content">
-        <div class="upper-content">
-          <a href="#" class="snippet-title">This is Title</a>
-        </div>
-        <div class="lower-content">
-          <span>mohitkumar124927</span>
-          <span>12 hrs ago</span>
-        </div>
-      </div>
-      <div class="card-right-content">
-        <a href="#"><i class="fa fa-pencil"></i></a>
-      </div>
-    </div>
-
-    <div class="snippet-card">
-      <div class="card-left-content">
-        <div class="upper-content">
-          <a href="#" class="snippet-title">This is Title</a>
-        </div>
-        <div class="lower-content">
-          <span>mohitkumar124927</span>
-          <span>12 hrs ago</span>
-        </div>
-      </div>
-      <div class="card-right-content">
-        <a href="#"><i class="fa fa-pencil"></i></a>
-      </div>
-    </div>
-  </div>
+  <h2 class="text-center mb-4">Recent Snippets</h2>
+  <div class="snippets-wrapper"></div>
 </div>
+
+<script type="module" src="{% static 'js/home.js' %}?{% now 'U' %}"></script>
 
 {% endblock content %}

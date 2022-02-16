@@ -106,3 +106,15 @@ def snippet_decrypt_api_view(request):
       return Response(response_obj, status = status.HTTP_200_OK)
   response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
   return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['GET'])
+def all_snippet_api_view(request):
+  if request.method == 'GET':
+    snippets = Snippet.objects.all().order_by('-created_at')
+    serializer = SnippetSerializer(snippets, many = True)
+
+    response_obj = {'success': True, 'data': serializer.data}
+    return Response(response_obj, status = status.HTTP_200_OK)
+  response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
+  return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)

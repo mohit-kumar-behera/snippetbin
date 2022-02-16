@@ -293,14 +293,15 @@ input.form-control {
 .error-message {
   color: var(--red);
 }
-.snippet-detail-wrapper {
-  width: 60%;
-}
-.snippet-detail-wrapper > * {
+.snippet-detail-div {
   width: 80%;
   margin: auto;
 }
-.snippet-detail-wrapper > *:not(:last-child) {
+.snippet-detail-div > * {
+  width: 80%;
+  margin: auto;
+}
+.snippet-detail-div > *:not(:last-child) {
   margin-bottom: 3rem;
 }
 .snippet-box {

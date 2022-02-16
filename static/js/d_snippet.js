@@ -1,6 +1,6 @@
 import { sendRequest, ENDPOINT_URL } from './module/helper.js';
 
-const snippetDetailWrapper = document.querySelector('.snippet-detail-wrapper');
+const snippetDetailWrapper = document.querySelector('.snippet-detail-div');
 
 const buildDecryptInputElem = function () {
   return `
