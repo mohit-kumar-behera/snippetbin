@@ -22,7 +22,7 @@ const buildSnippetDetailMarkup = function (data) {
       </div>
       <div class="lower-content">
         <small>${data.user.username}</small>
-        <small>${data.created_at}</small>
+        <small>${data.datetime}</small>
       </div>
     </div>
   </div>

@@ -3,7 +3,6 @@
 import {
   makeRandomID,
   isValidURL,
-  getCookie,
   ENDPOINT_URL,
   wait,
   sendRequest,
