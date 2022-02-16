@@ -1,5 +1,8 @@
 export const ENDPOINT_URL = `${location.protocol}//${location.host}`;
 
+export const wait = sec =>
+  new Promise(resolve => setTimeout(() => resolve(), sec * 1000));
+
 export const makeRandomID = function (length) {
   let result = '';
   const characters =
