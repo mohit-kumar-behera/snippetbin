@@ -149,7 +149,7 @@ a.button-fill:hover {
 footer {
   background-color: var(--dark-purple);
   color: var(--white);
-  padding: 1rem;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
@@ -206,9 +206,11 @@ input.form-control {
 }
 .card-left-content .lower-content > * {
   color: var(--dark-grey);
+  color: var(--lightpink);
 }
 .card-left-content .lower-content > *:not(:last-child)::after {
   content: ' | ';
+  color: var(--dark-grey);
 }
 
 .card-right-content {

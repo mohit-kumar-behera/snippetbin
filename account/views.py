@@ -32,6 +32,8 @@ def signup_view(request):
 
 @allow_unauthorized_user(redirect_url = 'home:home')
 def login_view(request):
+  redirect_to = request.GET.get('next', 'home:home')
+  
   if request.POST:
     email = request.POST.get('email')
     password = request.POST.get('password')
@@ -42,7 +44,7 @@ def login_view(request):
       return redirect('account:login')
 
     login(request, authenticated_user)
-    return redirect('home:home')
+    return redirect(redirect_to)
   return render(request, 'account/login.html')
 
 
