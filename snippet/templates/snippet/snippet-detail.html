@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>Snippet Detail | SnippetBin</title>{% endblock title %} 
+
+{% block content %} 
+
+<div class="mk-container snippet-detail-wrapper"></div>
+
+<script type="module" src="{% static 'js/d_snippet.js' %}?{% now 'U' %}"></script>
+
+{% endblock content %}

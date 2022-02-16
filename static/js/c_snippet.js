@@ -6,6 +6,7 @@ import {
   getCookie,
   ENDPOINT_URL,
   wait,
+  sendRequest,
 } from './module/helper.js';
 
 const form = document.getElementById('create-snippet-form');
@@ -27,26 +28,6 @@ const removeLoader = function (elem) {
   elem.querySelector('.spinner').innerHTML = '';
 };
 
-const sendDataToServer = async function (data) {
-  const url = `${ENDPOINT_URL}/api/snippet/create/`;
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken'),
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-    return result;
-  } catch (err) {
-    throw err;
-  }
-};
-
 const handleCreateSnippetForm = async function (data) {
   addLoader(formSubmitBtn);
   let formData = { ...data };
@@ -58,9 +39,10 @@ const handleCreateSnippetForm = async function (data) {
 
   if (encryptionKey) formData = { ...formData, isEncrypted: true };
 
+  const url = `${ENDPOINT_URL}/api/snippet/create/`;
   let response = null;
   try {
-    response = await sendDataToServer(formData);
+    response = await sendRequest(url, formData);
   } catch (err) {
     console.error(error);
     alert('Something went wrong');
@@ -98,40 +80,3 @@ form.addEventListener('submit', e => {
 
   handleCreateSnippetForm(snippetData);
 });
-
-// const encryptDecryptFunction = async function (
-//   data,
-//   key,
-//   type = ENCRYPTION_TYPE.encrypt
-// ) {
-//   try {
-//     const url = `https://classify-web.herokuapp.com/api/${type}`;
-//     const jsonData = JSON.stringify({ data, key });
-
-//     let response = await fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json;charset=utf-8',
-//       },
-//       body: jsonData,
-//     });
-
-//     const result = await response.json();
-
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// const checkAndEncryptData = async function (data, key) {
-//   if (!key) [false, data];
-
-//   const { result: encryptedData } = await encryptDecryptFunction(
-//     data,
-//     key,
-//     ENCRYPTION_TYPE.encrypt
-//   );
-
-//   return [true, encryptedData];
-// };

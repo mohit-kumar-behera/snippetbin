@@ -65,3 +65,44 @@ def snippet_api_create_view(request):
 
   response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
   return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['GET'])
+def snippet_api_detail_view(request, sid):
+  if request.method == 'GET':
+    try:
+      snippet_obj = Snippet.objects.get(id = sid)
+    except Snippet.DoesNotExist:
+      response_obj = {'success': False, 'data': {'error': 'Sorry, No data found'}}
+      return Response(response_obj, status = status.HTTP_404_NOT_FOUND)
+    except:
+      response_obj = {'success': False, 'data': {'error': 'Something went wrong'}}
+      return Response(response_obj, status = status.HTTP_400_BAD_REQUEST)
+    else:
+      serializer = SnippetSerializer(snippet_obj, many = False)
+      response_obj = {
+        'success': True,
+        'data': serializer.data
+      }
+      return Response(response_obj, status = status.HTTP_200_OK)
+
+  response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
+  return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['POST'])
+def snippet_decrypt_api_view(request):
+  if request.method == 'POST':
+    data_obj = request.data
+    encrypted_data = data_obj.get('data')
+    encrypted_key = data_obj.get('key')
+    try:
+      decoded_jwt = jwt.decode(encrypted_data, encrypted_key, algorithms=["HS256"])
+    except:
+      response_obj = {'success': False, 'data': {'error': 'Provided key is invalid'}}
+    else:
+      response_obj = {'success': True, 'data': decoded_jwt}
+    finally:
+      return Response(response_obj, status = status.HTTP_200_OK)
+  response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
+  return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)

@@ -9,4 +9,4 @@ def snippet_create_view(request):
 
 
 def snippet_detail_view(request, sid):
-  return HttpResponse(f"The ID is {str(sid)}")
+  return render(request, 'snippet/snippet-detail.html')

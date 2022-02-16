@@ -42,3 +42,21 @@ export const getCookie = function (cookieName) {
 
   return cookiesObj[cookieName];
 };
+
+export const sendRequest = async function (url, data) {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
