@@ -80,8 +80,17 @@ def snippet_api_detail_view(request, sid):
       return Response(response_obj, status = status.HTTP_400_BAD_REQUEST)
     else:
       serializer = SnippetSerializer(snippet_obj, many = False)
+      
+      is_other_user = None
+      logged_in_user = request.user if request.user.is_authenticated else None
+      if not logged_in_user or logged_in_user.username != snippet_obj.user.username:
+        is_other_user = True
+      else:
+        is_other_user = False
+        
       response_obj = {
         'success': True,
+        'is_other_user': is_other_user,
         'data': serializer.data
       }
       return Response(response_obj, status = status.HTTP_200_OK)

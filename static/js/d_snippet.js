@@ -13,7 +13,15 @@ const buildDecryptInputElem = function () {
   `;
 };
 
-const buildSnippetDetailMarkup = function (data) {
+const buildEditButton = function (url) {
+  return `
+  <div class="snippet-action-div text-center mt-5">
+    <a href="${url.original_url}edit" class="btn btn-primary w-50" style="font-size:1.1rem"><i class="fa fa-pencil mr-3"></i>EDIT</a>
+  </div>
+  `;
+};
+
+const buildSnippetDetailMarkup = function (is_other_user, data) {
   return `
   <div class="snippet-card">
     <div class="card-left-content">
@@ -47,6 +55,8 @@ const buildSnippetDetailMarkup = function (data) {
       </div>
     </div>
   </div>
+
+  ${is_other_user ? '' : buildEditButton(data.urls)}
   `;
 };
 
@@ -66,7 +76,9 @@ const showError = function (err) {
 };
 
 const showContent = function (data) {
-  const markup = buildSnippetDetailMarkup(data);
+  const is_other_user = data.is_other_user;
+  const res_data = data.data;
+  const markup = buildSnippetDetailMarkup(is_other_user, res_data);
   snippetDetailWrapper.innerHTML = '';
   snippetDetailWrapper.insertAdjacentHTML('afterbegin', markup);
 };
@@ -112,7 +124,7 @@ const fetchSnippetDetail = async function () {
 
   if (!response.success) return showError(response.data.error);
 
-  showContent(response.data);
+  showContent(response);
 
   if (response.data.is_encrypted) {
     const decryptBtn = document.getElementById('decrypt-btn');

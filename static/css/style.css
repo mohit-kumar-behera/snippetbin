@@ -293,7 +293,8 @@ input.form-control {
 .error-message {
   color: var(--red);
 }
-.snippet-detail-div {
+.snippet-detail-div,
+.snippet-action-div {
   width: 80%;
   margin: auto;
 }
