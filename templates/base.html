@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block title %} {% endblock title %}
+    <meta charset="utf-8" />
+    <meta link-colorarset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1b1b1b" />
+
+    <!-- FONT AWESOME LINK -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,400;1,600;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+      c
+    />
+
+    <!-- FAVICON -->
+    <!-- <link rel="icon" href="{% static 'media/logo/mk-final.png' %}" /> -->
+
+    <!-- CSS -->
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}?{% now 'U' %}"
+    /> -->
+    {% block stylesheet %} {% endblock stylesheet %}
+
+    <!-- JS -->
+    <!-- <script defer
+      type="module"
+      src="{% static 'js/script.js' %}?{% now 'U' %}"
+    ></script> -->
+  </head>
+  <body>
+    <noscript>
+      <style type="text/css">
+        .noscript {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 999;
+          background-color: white;
+          color: black;
+        }
+      </style>
+      <div class="noscript">
+        <h5>
+          This site requires Javascript to run. Please enable Javascript for
+          proper functioning.
+        </h5>
+      </div>
+    </noscript>
+
+    <header>{% include 'snippets/navbar.html' %}</header>
+
+    <main>{% block content %} {% endblock content %}</main>
+
+    <footer>{% include 'snippets/footer.html' %}</footer>
+  </body>
+</html>
