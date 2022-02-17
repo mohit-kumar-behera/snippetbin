@@ -168,6 +168,7 @@ footer a {
   width: 70%;
 }
 .form-wrapper {
+  width: 40%;
   border: 0.3px solid var(--grey);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
