@@ -1,4 +1,9 @@
-import { sendRequest, ENDPOINT_URL } from './module/helper.js';
+import {
+  sendRequest,
+  ENDPOINT_URL,
+  copyToClipBoard,
+  wait,
+} from './module/helper.js';
 
 const snippetDetailWrapper = document.querySelector('.snippet-detail-div');
 
@@ -47,11 +52,18 @@ const buildSnippetDetailMarkup = function (is_other_user, data) {
     <div class="url-div">
       <div>
         <span class="font-weight-bold">Original URL</span>
-        <a href="${data.urls.original_url}">${data.urls.original_url}</a>
+        <p>
+          <a href="${data.urls.original_url}">${data.urls.original_url}</a>
+        </p>
       </div>
       <div>
         <span class="font-weight-bold">Shorten URL</span>
-        <a href="${data.urls.shorten_url}">${data.urls.shorten_url}</a>
+        <p>
+          <a href="${data.urls.shorten_url}">${data.urls.shorten_url}</a>
+          <button class="btn btn-info ml-3 copy-btn" data-val="${
+            data.urls.shorten_url
+          }"><i class="fa fa-clipboard"></i></button>
+        </p>
       </div>
     </div>
   </div>
@@ -130,6 +142,16 @@ const fetchSnippetDetail = async function () {
     const decryptBtn = document.getElementById('decrypt-btn');
     decryptBtn.addEventListener('click', addHandlerToDecryptBtn);
   }
+
+  const copyBtn = document.querySelector('.copy-btn');
+  copyBtn.addEventListener('click', async e => {
+    const elem = e.currentTarget;
+    copyToClipBoard(elem.dataset.val);
+
+    elem.innerHTML = '<i class="fa fa-check"></i>';
+    await wait(1);
+    elem.innerHTML = '<i class="fa fa-clipboard"></i>';
+  });
 };
 
 fetchSnippetDetail();
