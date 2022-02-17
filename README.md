@@ -1,5 +1,6 @@
 # SnippetBin
 
+![SnippetBin Home Page](demo_images/home.png)
 It is a Django-based web application where users can dump/paste some content or code of any language and they receive a short link to share it.
 
 This application is provided with features like -
@@ -27,8 +28,42 @@ This application is provided with features like -
 
 ### Project Deployment Link - [snippetbin.herokuapp.com](https://snippetbin.herokuapp.com)
 
-### Video Demo Link - [snippetbin.herokuapp.com](https://snippetbin.herokuapp.com)
+### Video Demo Link - [vimeo.com/678863694](https://vimeo.com/678863694)
 
 ### NOTE:
 
 **This website is not mobile-friendly as the UI is not responsive for smaller screens. It will work perfectly on desktop**
+
+## MORE IMAGES
+
+### SnippetBin Signup Page
+
+![SnippetBin Signup Page](demo_images/signup.png)
+
+### SnippetBin Dashboard Page
+
+![SnippetBin Dashboard Page](demo_images/user.png)
+
+### Snippet Detail Page
+
+![Snippet Detail Page](demo_images/snipper_detail.png)
+
+### Snippet Statistics Page
+
+![Snippet Statistics Page](demo_images/stats.png)
+
+### SnippetBin Create Snippet Page
+
+![SnippetBin Create Snippet Page](demo_images/createsnippet.png)
+
+### Edit snippet expiration date
+
+![Edit snippet expiration date](demo_images/edit.png)
+
+### Encrypted Snippet content
+
+![Encrypted Snippet content](demo_images/encrypted.png)
+
+### SnippetBin Login Page
+
+![SnippetBin Signup Page](demo_images/login.png)
