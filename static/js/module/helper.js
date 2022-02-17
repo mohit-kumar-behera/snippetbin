@@ -60,3 +60,25 @@ export const sendRequest = async function (url, data) {
     throw err;
   }
 };
+
+export const addLoader = function (elem) {
+  elem.querySelector('.spinner').innerHTML = '';
+  elem
+    .querySelector('.spinner')
+    .insertAdjacentHTML(
+      'beforeend',
+      `<div class="spinner-border spinner-border-sm text-light ml-2 my-auto"></div>`
+    );
+};
+
+export const removeLoader = function (elem) {
+  elem.querySelector('.spinner').innerHTML = '';
+};
+
+export const copyToClipBoard = function (value) {
+  if (!value) return false;
+
+  navigator.clipboard?.writeText && navigator.clipboard.writeText(value);
+
+  return true;
+};

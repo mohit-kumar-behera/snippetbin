@@ -6,26 +6,14 @@ import {
   ENDPOINT_URL,
   wait,
   sendRequest,
+  addLoader,
+  removeLoader,
 } from './module/helper.js';
 
 const form = document.getElementById('create-snippet-form');
 const formSubmitBtn = document.querySelector('.form-submit');
 const encryptionCheckBox = document.getElementById('encryption');
 const encryptionInputField = document.querySelector('.encryption-key-div');
-
-const addLoader = function (elem) {
-  elem.querySelector('.spinner').innerHTML = '';
-  elem
-    .querySelector('.spinner')
-    .insertAdjacentHTML(
-      'beforeend',
-      `<div class="spinner-border spinner-border-sm text-light ml-2 my-auto"></div>`
-    );
-};
-
-const removeLoader = function (elem) {
-  elem.querySelector('.spinner').innerHTML = '';
-};
 
 const handleCreateSnippetForm = async function (data) {
   addLoader(formSubmitBtn);

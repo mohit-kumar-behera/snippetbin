@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.urls import reverse
 from django.db import transaction
 
@@ -123,6 +124,37 @@ def all_snippet_api_view(request):
     snippets = Snippet.objects.all().order_by('-created_at')
     serializer = SnippetSerializer(snippets, many = True)
 
+    response_obj = {'success': True, 'data': serializer.data}
+    return Response(response_obj, status = status.HTTP_200_OK)
+  response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
+  return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['POST'])
+def snippet_api_edit_view(request, sid):
+  if request.method == 'POST':
+    try:
+      snippet_obj = Snippet.objects.get(id = sid)
+    except Snippet.DoesNotExist:
+      response_obj = {'success': False, 'data': {'error': 'Snippet with this ID was not found'}}
+      return Response(response_obj, status = status.HTTP_404_NOT_FOUND)
+    
+    data_obj = request.data
+    expiration_date = data_obj.get('renew-expiration', None)
+    
+    expiration_date_dtm = datetime.strptime(expiration_date, '%Y-%m-%d')
+    now = datetime.now()
+
+    expiration_date = expiration_date_dtm if expiration_date_dtm > now else None
+
+    if not expiration_date:
+      return Response({'success': False, 'data': {'error': 'Expiration Date can\'t be any date in past'}}, status = status.HTTP_200_OK)
+
+    snippet_obj.expiration_date = expiration_date
+    snippet_obj.has_expiry = True
+    snippet_obj.save()
+
+    serializer = SnippetSerializer(snippet_obj, many = False)
     response_obj = {'success': True, 'data': serializer.data}
     return Response(response_obj, status = status.HTTP_200_OK)
   response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}

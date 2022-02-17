@@ -6,21 +6,21 @@
 {% block content %} 
 
 <div class="mk-container form-wrapper">
-  <form id="create-snippet-form" class="mb-5">
-    <h2 class="mb-5 font-weight-bold">Edit Snippet</h2>
+  <form method="post" id="create-snippet-form" class="mb-5">
+    <h2 class="mb-5 font-weight-bold">Your Snippet</h2>
     
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title for Snippet" spellcheck="false" required value="{{ snippet.title }}">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title for Snippet" spellcheck="false" required value="{{ snippet.title }}" disabled>
     </div>
     <div class="form-group">
       <label for="snippet">Your Snippet</label>
-      <textarea class="form-control" id="snippet" name="snippet" rows="15" placeholder="Write/Paste your Snippet" spellcheck="false" required {% if snippet.is_encrypted %}disabled{% endif %}>{{ snippet.snippet }}</textarea>
+      <textarea class="form-control" id="snippet" name="snippet" rows="15" placeholder="Write/Paste your Snippet" spellcheck="false" required disabled>{{ snippet.snippet }}</textarea>
     </div>
 
     {% if snippet.is_encrypted %}
       <div class="form-group">
-        <div class="input-group w-50 mx-auto">
+        <div class="input-group mx-auto" style="width:70%">
           <input type="text" class="form-control decrypt-input" placeholder="Password Key" id="decrypt-input">
           <div class="input-group-append">
             <button type="button" class="input-group-text btn decrypt-btn" id="decrypt-btn">Decrypt</button>
@@ -29,24 +29,24 @@
       </div>
     {% endif %}
 
-    <h4 class="mt-5 mb-4 font-weight-bold">Snippet Configuration</h4>
-    <!-- <div class="form-group w-50">
-      <p class="mb-1 text-info"><i>Snippet expiry is {% if snippet.has_expiry %}active{% else %}not active{% endif %}</i></p>
-      <label for="expiry">Extend Snippet Expiry</label>
-      <select id="expiry" name="expiry" class="form-control">
-        <option selected>Never</option>
-        <option>1 day</option>
-      </select>
-      <input type="date"/>
-    </div> -->
+    <h4 class="mb-2 mt-5 font-weight-bold">URL</h4>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control url-text" readonly value="{{ snippet.tinyurl.shorten_url }}">
+      <div class="input-group-append">
+        <button class="btn btn-info copy-btn"><i class="fa fa-clipboard"></i></button>
+      </div>
+    </div>
+    
+    <h4 class="mb-2 mt-5 font-weight-bold text-center">Renew Configuration</h4>
+    <hr>
 
     <div class="form-group">
       <label for="renew-expiration">Add/Renew Expiration Date</label>
       <input type="date" class="form-control" id="renew-expiration" name="renew-expiration">
     </div>
 
-    <button type="submit" class="btn btn-primary d-flex justify-content-center form-submit" style="width:250px; padding: 0.7rem 1rem;">
-      <span>EDIT SNIPPET</span>
+    <button type="submit" class="btn btn-primary d-flex justify-content-center form-submit">
+      <span>UPDATE EXPIRY</span>
       <div class="spinner"></div>
     </button>
   </form>

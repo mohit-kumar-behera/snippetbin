@@ -16,6 +16,7 @@ class Snippet(models.Model):
   is_encrypted = models.BooleanField(verbose_name = 'Is Encrypted', default = False)
   has_expiry = models.BooleanField(verbose_name = 'Has Expiry', default = False)
   created_at = models.DateTimeField(auto_now_add = True)
+  expiration_date = models.DateTimeField(blank = True, null = True)
 
   def __str__(self):
     return str(self.id)
