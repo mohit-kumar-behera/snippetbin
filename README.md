@@ -25,4 +25,10 @@ This application is provided with features like -
 
 `Django` `Python` `HTML` `CSS` `Javascript` `Bootstrap` `Django REST Framework`
 
-### Project Deployed at - [snippetbin.herokuapp.com/](https://snippetbin.herokuapp.com/)
+### Project Deployment Link - [snippetbin.herokuapp.com](https://snippetbin.herokuapp.com)
+
+### Video Demo Link - [snippetbin.herokuapp.com](https://snippetbin.herokuapp.com)
+
+### NOTE:
+
+**This website is not mobile-friendly as the UI is not responsive for smaller screens. It will work perfectly on desktop**
