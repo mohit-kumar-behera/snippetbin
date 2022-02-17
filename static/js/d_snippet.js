@@ -100,7 +100,7 @@ const addHandlerToDecryptBtn = async function () {
   try {
     response = await sendRequest(url, data);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     alert('Something went wrong');
   }
 

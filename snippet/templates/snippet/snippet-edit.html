@@ -1,13 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}<title>Create Snippet | SnippetBin</title>{% endblock title %} 
+{% block title %}<title>Edit Snippet | SnippetBin</title>{% endblock title %} 
 
 {% block content %} 
 
 <div class="mk-container form-wrapper">
+  <form id="create-snippet-form" class="mb-5">
+    <h2 class="mb-5 font-weight-bold">Edit Snippet</h2>
+    
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title for Snippet" spellcheck="false" required value="{{ snippet.title }}">
+    </div>
+    <div class="form-group">
+      <label for="snippet">Your Snippet</label>
+      <textarea class="form-control" id="snippet" name="snippet" rows="15" placeholder="Write/Paste your Snippet" spellcheck="false" required {% if snippet.is_encrypted %}disabled{% endif %}>{{ snippet.snippet }}</textarea>
+    </div>
+
+    {% if snippet.is_encrypted %}
+      <div class="form-group">
+        <div class="input-group w-50 mx-auto">
+          <input type="text" class="form-control decrypt-input" placeholder="Password Key" id="decrypt-input">
+          <div class="input-group-append">
+            <button type="button" class="input-group-text btn decrypt-btn" id="decrypt-btn">Decrypt</button>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <h4 class="mt-5 mb-4 font-weight-bold">Snippet Configuration</h4>
+    <div class="form-group w-50">
+      <p class="mb-1 text-info"><i>Snippet expiry is {% if snippet.has_expiry %}active{% else %}not active{% endif %}</i></p>
+      <label for="expiry">Extend Snippet Expiry</label>
+      <select id="expiry" name="expiry" class="form-control">
+        <option selected>Never</option>
+        <option>1 day</option>
+      </select>
+      <input type="date"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary d-flex justify-content-center form-submit"  style="width:250px; padding: 0.7rem 1rem;">
+      <span>EDIT SNIPPET</span>
+      <div class="spinner"></div>
+    </button>
+  </form>
+
+  <hr>
+
+  <div class="action-div d-flex justify-content-around">
+    <a href="{% url 'home:home' %}" class="btn btn-light w-50 mr-2">CANCEL</a>
+    <button class="btn btn-danger w-50 ml-2" id="delete-btn"><i class="fa fa-trash-o mr-2"></i>DELETE</button>
+  </div>
 </div>
 
-<script type="module" src="{% static 'js/c_snippet.js' %}?{% now 'U' %}"></script>
+<script type="module" src="{% static 'js/e_snippet.js' %}?{% now 'U' %}"></script>
 
 {% endblock content %}

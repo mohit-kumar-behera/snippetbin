@@ -18,7 +18,7 @@ ENDPOINT_URL = 'https://api.shrtco.de/v2/shorten'
 def snippet_api_create_view(request):
   if request.method == 'POST':
     data_obj = request.data
-    
+
     title = data_obj.get('title')
     snippet = data_obj.get('snippet')
     expiry = data_obj.get('expiry').lower()
@@ -125,5 +125,27 @@ def all_snippet_api_view(request):
 
     response_obj = {'success': True, 'data': serializer.data}
     return Response(response_obj, status = status.HTTP_200_OK)
+  response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
+  return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['POST'])
+def snippet_api_delete_view(request, sid):
+  if request.method == 'POST':
+    try:
+      snippet = Snippet.objects.get(id = sid)
+    except Snippet.DoesNotExist:
+      response_obj = {'success': False, 'data': {'error': 'Snippet with this ID was not found'}}
+      return Response(response_obj, status = status.HTTP_404_NOT_FOUND)
+    
+    snippet.delete()
+    redirect_url = request.build_absolute_uri(reverse('home:dashboard', args = (snippet.user.username,)))
+    response_obj = {
+      'success': True, 
+      'redirect_url': redirect_url, 
+      'data': {'message': 'Deleted Successfully'}
+    }
+    return Response(response_obj, status = status.HTTP_200_OK)
+ 
   response_obj = {'success': False, 'data': {'error': 'Method not allowed'}}
   return Response(response_obj, status = status.HTTP_405_METHOD_NOT_ALLOWED)
