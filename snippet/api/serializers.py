@@ -3,11 +3,6 @@ from snippet.models import Snippet
 from account.serializers import UserSerializer
 from home.serializers import TinyURLSerializer
 
-from pytz import timezone
-from snippet.utils import find_datetime_delta
-
-import datetime
-
 class SnippetSerializer(serializers.ModelSerializer):
   user = UserSerializer(many = False)
   urls = serializers.SerializerMethodField()

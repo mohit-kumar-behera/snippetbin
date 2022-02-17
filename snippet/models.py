@@ -24,6 +24,9 @@ class Snippet(models.Model):
     now = datetime.datetime.now()
     created_at = self.created_at
 
+    # Indian Standard Time (+5:30)
+    created_at = created_at + datetime.timedelta(hours = 5, minutes = 30)
+
     start_tz = created_at.replace(tzinfo = timezone('UTC'))
     end_tz = now.replace(tzinfo = timezone('UTC'))
 
