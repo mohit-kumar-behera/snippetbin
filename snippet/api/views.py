@@ -27,6 +27,8 @@ def snippet_api_create_view(request):
     is_encrypted = data_obj.get('isEncrypted', False)
     snippet_is_url = data_obj.get('is_url', False)
 
+    temp_snippet = snippet
+
     if is_encrypted:
       encryption_key = data_obj.get('encryption-key')
       encoded_jwt = jwt.encode({"snippet": snippet}, encryption_key, algorithm="HS256")
@@ -44,9 +46,12 @@ def snippet_api_create_view(request):
       response_obj = {'success': False, 'data': {'error': 'Something went wrong'}}
       return Response(response_obj, status = status.HTTP_400_BAD_REQUEST)
     else:
-      original_url = snippet if snippet_is_url else request.build_absolute_uri(reverse('snippet:snippet_detail', args = (snippet_obj.id,)))
+      original_url = request.build_absolute_uri(reverse('snippet:snippet_detail', args = (snippet_obj.id,)))
 
-      params = {'url': original_url}
+      if snippet_is_url:
+        url = temp_snippet
+
+      params = {'url': url}
       res = requests.get(url = ENDPOINT_URL, params = params)
       res_data = res.json()
 
