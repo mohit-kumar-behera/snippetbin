@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
+from snippet.models import Snippet
 
 User = get_user_model()
 
@@ -26,5 +27,9 @@ def dashboard_view(request, username):
   except MultipleObjectsReturned:
     user = User.objects.filter(username = username).first()
   
+  
+  snippets_of_user = Snippet.objects.filter(user = user).order_by('-created_at')
+  
   context['user'] = user
+  context['snippets'] = snippets_of_user
   return render(request, 'home/dashboard.html', context)

@@ -9,3 +9,8 @@ def snippet_create_view(request):
 
 def snippet_detail_view(request, sid):
   return render(request, 'snippet/snippet-detail.html')
+
+
+@login_required(login_url = 'account:login')
+def snippet_edit_view(request, sid):
+  return render(request, 'snippet/snippet-edit.html')

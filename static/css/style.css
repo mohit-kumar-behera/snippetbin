@@ -141,7 +141,8 @@ a.button-fill:hover {
   font-size: 1.5rem;
 }
 
-.navlink.snippet-btn {
+.navlink.snippet-btn,
+.dashboard.snippet-btn {
   background-color: var(--blue);
   border-color: var(--blue);
 }
@@ -345,4 +346,10 @@ input.form-control {
 .url-div > div {
   display: flex;
   flex-direction: column;
+}
+.message-box {
+  width: 50%;
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
 }

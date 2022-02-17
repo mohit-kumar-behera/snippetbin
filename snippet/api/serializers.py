@@ -23,16 +23,5 @@ class SnippetSerializer(serializers.ModelSerializer):
     return serializer.data
   
   def get_datetime(self, snippet):
-    now = datetime.datetime.now()
-    created_at = snippet.created_at
-
-    start_tz = created_at.replace(tzinfo = timezone('UTC'))
-    end_tz = now.replace(tzinfo = timezone('UTC'))
-
-    val, show_type = find_datetime_delta(start_tz, end_tz)
-    
-    if show_type:
-      show_type = show_type if val == 1 else show_type + 's'
-
-    result = f'{val} {show_type} ago' if show_type else f'{val}'
+    result = snippet.extract_delta_datetime()
     return result

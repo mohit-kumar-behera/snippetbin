@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+
+from pytz import timezone
+from snippet.utils import find_datetime_delta
+import datetime
 import uuid
 
 User = get_user_model()
@@ -15,3 +19,18 @@ class Snippet(models.Model):
 
   def __str__(self):
     return str(self.id)
+  
+  def extract_delta_datetime(self):
+    now = datetime.datetime.now()
+    created_at = self.created_at
+
+    start_tz = created_at.replace(tzinfo = timezone('UTC'))
+    end_tz = now.replace(tzinfo = timezone('UTC'))
+
+    val, show_type = find_datetime_delta(start_tz, end_tz)
+    
+    if show_type:
+      show_type = show_type if val == 1 else show_type + 's'
+
+    result = f'{val} {show_type} ago' if show_type else f'{val}'
+    return result

@@ -49,39 +49,34 @@
   <div class="snippets-wrapper">
     <h1 class="text-center">User Snippets</h1>
 
-    <div class="snippet-card">
-      <div class="card-left-content">
-        <div class="upper-content">
-          <a href="#" class="snippet-title">This is Title</a>
+    {% if snippets %}
+      {% for snippet in snippets %}
+        <div class="snippet-card">
+          <div class="card-left-content">
+            <div class="upper-content">
+              <a href="{% url 'snippet:snippet_detail' snippet.id %}" class="snippet-title">{{ snippet.title }}</a>
+            </div>
+            <div class="lower-content">
+              <span>{{ snippet.user.username }}</span>
+              <span>{{ snippet.extract_delta_datetime }}</span>
+            </div>
+          </div>
+          {% if not is_other_user %}
+            <div class="card-right-content">
+              <a href="{% url 'snippet:snippet_edit' snippet.id %}"><i class="fa fa-pencil"></i></a>
+            </div>
+          {% endif %}
         </div>
-        <div class="lower-content">
-          <span>mohitkumar124927</span>
-          <span>12 hrs ago</span>
-        </div>
+      {% endfor %}
+    {% else %}
+      <div class="message-box border">
+        <h4 class="mb-4">User has not added any snippets</h4>
+        {% if not is_other_user %}
+          <a href="{% url 'snippet:snippet' %}" class="dashboard button snippet-btn"><i class="fa fa-plus"></i> CREATE SNIPPET</a>
+        {% endif %}
       </div>
-      {% if not is_other_user %}
-        <div class="card-right-content">
-          <a href="#"><i class="fa fa-pencil"></i></a>
-        </div>
-      {% endif %}
-    </div>
+    {% endif %}
 
-    <div class="snippet-card">
-      <div class="card-left-content">
-        <div class="upper-content">
-          <a href="#" class="snippet-title">This is Title</a>
-        </div>
-        <div class="lower-content">
-          <span>mohitkumar124927</span>
-          <span>12 hrs ago</span>
-        </div>
-      </div>
-      {% if not is_other_user %}
-        <div class="card-right-content">
-          <a href="#"><i class="fa fa-pencil"></i></a>
-        </div>
-      {% endif %}
-    </div>
   </div>
 </div>
 
