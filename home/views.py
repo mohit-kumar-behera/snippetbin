@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q, Count
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
@@ -27,9 +28,12 @@ def dashboard_view(request, username):
   except MultipleObjectsReturned:
     user = User.objects.filter(username = username).first()
   
-  
   snippets_of_user = Snippet.objects.filter(user = user).order_by('-created_at')
-  
+
+  private_r = Count('snippet', filter = Q(is_encrypted = True))
+  ans = Snippet.objects.annotate(private_r = private_r)
+  print(ans)
+
   context['user'] = user
   context['snippets'] = snippets_of_user
   return render(request, 'home/dashboard.html', context)
