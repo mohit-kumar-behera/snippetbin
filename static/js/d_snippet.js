@@ -69,6 +69,12 @@ const buildSnippetDetailMarkup = function (is_other_user, data) {
   </div>
 
   ${is_other_user ? '' : buildEditButton(data.urls)}
+
+  <div class="snippet-action-div text-center mt-5">
+    <a href="/snippet/${
+      data.id
+    }/statistics/" class="btn btn-warning" style="font-size:1.1rem; width: 65%"><i class="fa fa-bar-chart mr-3"></i>STATISTICS</a>
+  </div>
   `;
 };
 

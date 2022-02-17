@@ -62,3 +62,15 @@ class Snippet(models.Model):
       if now_tz > expire_tz:
         flag = True      
     return flag
+
+
+class SnipetTracker(models.Model):
+  id = models.UUIDField(default = uuid.uuid4, unique = True, primary_key = True, editable = False)
+  snippet = models.ForeignKey(Snippet, on_delete = models.CASCADE)
+  hostname = models.CharField(max_length = 255)
+  ip_addr = models.CharField(max_length = 255)
+  count = models.IntegerField(default = 0)
+  viewed_at = models.DateTimeField(auto_now = True)
+
+  def __str__(self):
+    return str(self.id)

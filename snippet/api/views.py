@@ -128,9 +128,7 @@ def all_snippet_api_view(request):
   if request.method == 'GET':
     start = int(request.GET.get('start', None))
     end = int(request.GET.get('end', None))
-
-    print(start, end)
-
+    
     if start == None or end == None:
       snippets = Snippet.objects.all().order_by('-created_at')
     else:

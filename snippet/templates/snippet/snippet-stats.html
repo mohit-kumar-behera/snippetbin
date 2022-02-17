@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>Snippet Detail | SnippetBin</title>{% endblock title %} 
+
+{% block content %} 
+
+<div class="mk-container">
+  <table class="table border">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">IP Address</th>
+        <th scope="col">Hostname</th>
+        <th scope="col">Last Viewed At</th>
+        <th scope="col">Num. Views</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if stats %}
+        {% for stat in stats %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ stat.ip_addr }}</td>
+            <td>{{ stat.hostname }}</td>
+            <td>{{ stat.viewed_at }}</td>
+            <td>{{ stat.count }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4">No one have opened this snippet yet</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock content %}
