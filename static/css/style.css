@@ -179,7 +179,11 @@ label {
 input.form-control {
   padding: 1.4rem 0.9rem;
 }
-
+.load-more-btn {
+  margin: auto;
+  width: 250px;
+  padding: 0.7rem 1rem;
+}
 .snippets-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

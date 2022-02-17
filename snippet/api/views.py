@@ -126,7 +126,16 @@ def snippet_decrypt_api_view(request):
 @api_view(['GET'])
 def all_snippet_api_view(request):
   if request.method == 'GET':
-    snippets = Snippet.objects.all().order_by('-created_at')
+    start = int(request.GET.get('start', None))
+    end = int(request.GET.get('end', None))
+
+    print(start, end)
+
+    if start == None or end == None:
+      snippets = Snippet.objects.all().order_by('-created_at')
+    else:
+      snippets = Snippet.objects.all().order_by('-created_at')[start:end]
+
     serializer = SnippetSerializer(snippets, many = True)
 
     response_obj = {'success': True, 'data': serializer.data}

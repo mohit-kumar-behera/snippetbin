@@ -1,4 +1,5 @@
 export const ENDPOINT_URL = `${location.protocol}//${location.host}`;
+export const RES_PER_PAGE = 10;
 
 export const wait = sec =>
   new Promise(resolve => setTimeout(() => resolve(), sec * 1000));
