@@ -31,7 +31,6 @@ const handleCreateSnippetForm = async function (data) {
   try {
     response = await sendRequest(url, formData);
   } catch (err) {
-    console.error(error);
     alert('Something went wrong');
   } finally {
     await wait(0.7);
