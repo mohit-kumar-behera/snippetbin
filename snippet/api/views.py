@@ -48,6 +48,7 @@ def snippet_api_create_view(request):
     else:
       original_url = request.build_absolute_uri(reverse('snippet:snippet_detail', args = (snippet_obj.id,)))
 
+      url = original_url
       if snippet_is_url:
         url = temp_snippet
 
@@ -128,7 +129,7 @@ def all_snippet_api_view(request):
   if request.method == 'GET':
     start = int(request.GET.get('start', None))
     end = int(request.GET.get('end', None))
-    
+
     if start == None or end == None:
       snippets = Snippet.objects.all().order_by('-created_at')
     else:
