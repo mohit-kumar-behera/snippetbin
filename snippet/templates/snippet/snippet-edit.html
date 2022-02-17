@@ -30,7 +30,7 @@
     {% endif %}
 
     <h4 class="mt-5 mb-4 font-weight-bold">Snippet Configuration</h4>
-    <div class="form-group w-50">
+    <!-- <div class="form-group w-50">
       <p class="mb-1 text-info"><i>Snippet expiry is {% if snippet.has_expiry %}active{% else %}not active{% endif %}</i></p>
       <label for="expiry">Extend Snippet Expiry</label>
       <select id="expiry" name="expiry" class="form-control">
@@ -38,9 +38,14 @@
         <option>1 day</option>
       </select>
       <input type="date"/>
+    </div> -->
+
+    <div class="form-group">
+      <label for="renew-expiration">Add/Renew Expiration Date</label>
+      <input type="date" class="form-control" id="renew-expiration" name="renew-expiration">
     </div>
 
-    <button type="submit" class="btn btn-primary d-flex justify-content-center form-submit"  style="width:250px; padding: 0.7rem 1rem;">
+    <button type="submit" class="btn btn-primary d-flex justify-content-center form-submit" style="width:250px; padding: 0.7rem 1rem;">
       <span>EDIT SNIPPET</span>
       <div class="spinner"></div>
     </button>
