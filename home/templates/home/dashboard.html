@@ -46,8 +46,8 @@
 {% endif %}
 
 <div class="mk-container">
+  <h1 class="text-center mb-5">User Snippets</h1>
   <div class="snippets-wrapper">
-    <h1 class="text-center">User Snippets</h1>
 
     {% if snippets %}
       {% for snippet in snippets %}
@@ -64,9 +64,14 @@
               <span>{{ snippet.extract_delta_datetime }}</span>
             </div>
           </div>
-          {% if not is_other_user %}
+          {% if not is_other_user and not snippet.if_has_expired %}
             <div class="card-right-content">
               <a href="{% url 'snippet:snippet_edit' snippet.id %}"><i class="fa fa-pencil"></i></a>
+            </div>
+          {% endif %}
+          {% if snippet.if_has_expired %}
+            <div class="card-right-content">
+              <a style="color: #fff"><i class="fa fa-hourglass-end" style="font-size:0.75rem"></i></a>
             </div>
           {% endif %}
         </div>

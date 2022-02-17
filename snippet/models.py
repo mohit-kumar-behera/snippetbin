@@ -17,6 +17,7 @@ class Snippet(models.Model):
   has_expiry = models.BooleanField(verbose_name = 'Has Expiry', default = False)
   created_at = models.DateTimeField(auto_now_add = True)
   expiration_date = models.DateTimeField(blank = True, null = True)
+  expired = models.BooleanField(default = False, blank = True, null = True)
 
   def __str__(self):
     return str(self.id)
@@ -38,3 +39,26 @@ class Snippet(models.Model):
 
     result = f'{val} {show_type} ago' if show_type else f'{val}'
     return result
+  
+  def if_has_expired(self):
+    flag = False
+    
+    if self.has_expiry:
+      now = datetime.datetime.now()
+      created_at = self.created_at
+      expiration_date = self.expiration_date
+
+      start_tz = created_at.replace(tzinfo = timezone('UTC'))
+      now_tz = now.replace(tzinfo = timezone('UTC'))
+
+      # """ REMOVE AFTER TESTING """
+      # now_tz = now_tz + datetime.timedelta(days = 1)
+      
+      if not expiration_date:
+        expire_tz = start_tz + datetime.timedelta(days = 1)
+      else:
+        expire_tz = expiration_date.replace(tzinfo = timezone('UTC'))
+
+      if now_tz > expire_tz:
+        flag = True      
+    return flag

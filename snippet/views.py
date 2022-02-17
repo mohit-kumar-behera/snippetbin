@@ -1,13 +1,10 @@
-from django.forms import ValidationError
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from account.decorators import check_edit_authorization
 
 from snippet.models import Snippet
-from snippet.decorators import is_valid_uuid
-
-import uuid
+from snippet.decorators import is_valid_uuid, check_expiry
 
 
 @login_required(login_url = 'account:login')
@@ -15,9 +12,9 @@ def snippet_create_view(request):
   return render(request, 'snippet/snippet.html')
 
 
+@check_expiry
 def snippet_detail_view(request, sid):
   return render(request, 'snippet/snippet-detail.html')
-
 
 @login_required(login_url = 'account:login')
 @is_valid_uuid

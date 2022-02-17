@@ -7,6 +7,7 @@ class SnippetSerializer(serializers.ModelSerializer):
   user = UserSerializer(many = False)
   urls = serializers.SerializerMethodField()
   datetime = serializers.SerializerMethodField()
+  has_expired = serializers.SerializerMethodField()
 
   class Meta:
     model = Snippet
@@ -20,3 +21,6 @@ class SnippetSerializer(serializers.ModelSerializer):
   def get_datetime(self, snippet):
     result = snippet.extract_delta_datetime()
     return result
+  
+  def get_has_expired(self, snippet):
+    return snippet.if_has_expired()

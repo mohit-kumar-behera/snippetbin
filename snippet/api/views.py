@@ -74,10 +74,10 @@ def snippet_api_detail_view(request, sid):
     try:
       snippet_obj = Snippet.objects.get(id = sid)
     except Snippet.DoesNotExist:
-      response_obj = {'success': False, 'data': {'error': 'Sorry, No data found'}}
+      response_obj = {'success': False, 'data': {'error': 'No such Snippet exists for the given ID'}}
       return Response(response_obj, status = status.HTTP_404_NOT_FOUND)
     except:
-      response_obj = {'success': False, 'data': {'error': 'Something went wrong'}}
+      response_obj = {'success': False, 'data': {'error': 'Not a Valid UUID'}}
       return Response(response_obj, status = status.HTTP_400_BAD_REQUEST)
     else:
       serializer = SnippetSerializer(snippet_obj, many = False)

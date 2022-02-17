@@ -1,8 +1,16 @@
 const snippetsWrapper = document.querySelector('.snippets-wrapper');
 
-const buildSnippetCard = function (snippet) {
+const buildHourGlassIcon = function () {
   return `
-  <div class="snippet-card">
+  <div class="card-right-content"><a style="color: #fff"><i class="fa fa-hourglass-end" style="font-size:0.75rem"></i></a></div>
+  `;
+};
+
+const buildSnippetCard = function (snippet) {
+  let has_expired = snippet.has_expired;
+
+  return `
+  <div class="snippet-card ${has_expired ? 'fade-down' : ''}">
     <div class="card-left-content">
       <div class="upper-content">
         ${snippet.is_encrypted ? '<i class="fa fa-lock mr-2"></i>' : ''}
@@ -15,6 +23,7 @@ const buildSnippetCard = function (snippet) {
         <span>${snippet.datetime}</span>
       </div>
     </div>
+    ${has_expired ? buildHourGlassIcon() : ''}
   </div>
   `;
 };
