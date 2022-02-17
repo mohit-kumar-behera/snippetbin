@@ -7,7 +7,11 @@
 
 <div class="mk-container">
   <h2 class="text-center mb-4">Recent Snippets</h2>
-  <div class="snippets-wrapper"></div>
+  <div class="snippets-wrapper">
+    <div class="spinner w-100 text-center mt-5">
+      <div class="spinner-border spinner-border-lg text-primary"></div>
+    </div>
+  </div>
 </div>
 
 <script type="module" src="{% static 'js/home.js' %}?{% now 'U' %}"></script>
