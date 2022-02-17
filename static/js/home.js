@@ -5,7 +5,10 @@ const buildSnippetCard = function (snippet) {
   <div class="snippet-card">
     <div class="card-left-content">
       <div class="upper-content">
-        <a href="${snippet.urls.original_url}" class="snippet-title">${snippet.title}</a>
+        ${snippet.is_encrypted ? '<i class="fa fa-lock mr-2"></i>' : ''}
+        <a href="${snippet.urls.original_url}" class="snippet-title">${
+    snippet.title
+  }</a>
       </div>
       <div class="lower-content">
         <span>${snippet.user.username}</span>

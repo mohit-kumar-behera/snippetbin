@@ -54,6 +54,9 @@
         <div class="snippet-card">
           <div class="card-left-content">
             <div class="upper-content">
+              {% if snippet.is_encrypted %}
+                <i class="fa fa-lock mr-2"></i>
+              {% endif %}
               <a href="{% url 'snippet:snippet_detail' snippet.id %}" class="snippet-title">{{ snippet.title }}</a>
             </div>
             <div class="lower-content">
