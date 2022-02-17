@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from account.decorators import check_edit_authorization
 
-from snippet.models import Snippet, SnipetTracker
+from snippet.models import Snippet
 from snippet.decorators import is_valid_uuid, check_expiry
 
 import socket
