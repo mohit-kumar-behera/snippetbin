@@ -1,5 +1,19 @@
 export const ENDPOINT_URL = `${location.protocol}//${location.host}`;
 export const RES_PER_PAGE = 10;
+export const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 export const wait = sec =>
   new Promise(resolve => setTimeout(() => resolve(), sec * 1000));
@@ -82,4 +96,40 @@ export const copyToClipBoard = function (value) {
   navigator.clipboard?.writeText && navigator.clipboard.writeText(value);
 
   return true;
+};
+
+export const buildSpanTag = function (type, data = null) {
+  let text = 'This snippet will never expire';
+
+  const formatDMY = (d, m, y) => `${months[m]} ${d}, ${y}`;
+  const formatDMYHMS = (d, m, y, h, min) =>
+    `${formatDMY(d, m, y)} | ${h}:${min}`;
+
+  if (type === 1) {
+    // expires after 1 day
+    const dt = new Date(data);
+    const [d, m, y, h, min] = [
+      dt.getDate(),
+      dt.getMonth(),
+      dt.getFullYear(),
+      dt.getHours(),
+      dt.getMinutes(),
+    ];
+
+    text = `This snippet will expire <b>1</b> day after <b>${formatDMYHMS(
+      d,
+      m,
+      y,
+      h,
+      min
+    )}</b>`;
+  } else if (type === 2) {
+    // expires in given date
+    const dt = new Date(data);
+    const [d, m, y] = [dt.getDate(), dt.getMonth(), dt.getFullYear()];
+
+    text = `This snippet will expire on <b>${formatDMY(d, m, y)}</b>`;
+  }
+
+  return `<span class="text-muted">${text}</span>`;
 };

@@ -56,8 +56,10 @@ class Snippet(models.Model):
       
       if not expiration_date:
         expire_tz = start_tz + datetime.timedelta(days = 1)
-      else:
+      else: 
         expire_tz = expiration_date.replace(tzinfo = timezone('UTC'))
+
+      expire_tz = expire_tz + datetime.timedelta(hours = 5, minutes = 30)
 
       if now_tz > expire_tz:
         flag = True      

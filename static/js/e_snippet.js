@@ -5,12 +5,14 @@ import {
   removeLoader,
   wait,
   copyToClipBoard,
+  buildSpanTag,
 } from './module/helper.js';
 
 const deleteBtn = document.getElementById('delete-btn');
 const decryptBtn = document.getElementById('decrypt-btn');
 const editSnippetForm = document.getElementById('create-snippet-form');
 const copyBtn = document.querySelector('.copy-btn');
+const expirationInfoDiv = document.getElementById('expiration-info-div');
 
 const deleteSnippetHandler = async function () {
   const proceed_with_deletion = confirm('Are you sure you want to delete?');
@@ -82,6 +84,15 @@ const handleEditSnippetForm = async function (data) {
   }
 
   if (!response.success) return alert(response.data.error);
+
+  const curr_snippet = response.data;
+  const markup = curr_snippet.has_expiry
+    ? curr_snippet.expiration_date
+      ? buildSpanTag(2, curr_snippet.expiration_date)
+      : buildSpanTag(1, curr_snippet.created_at)
+    : buildSpanTag(0);
+
+  expirationInfoDiv.innerHTML = markup;
 
   editSnippetForm.insertAdjacentHTML(
     'beforeend',

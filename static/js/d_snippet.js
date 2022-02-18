@@ -3,23 +3,10 @@ import {
   ENDPOINT_URL,
   copyToClipBoard,
   wait,
+  buildSpanTag,
 } from './module/helper.js';
 
 const snippetDetailWrapper = document.querySelector('.snippet-detail-div');
-const months = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-];
 
 const buildDecryptInputElem = function () {
   return `
@@ -38,42 +25,6 @@ const buildEditButton = function (url) {
     <a href="${url.original_url}edit" class="btn btn-primary w-50" style="font-size:1.1rem"><i class="fa fa-pencil mr-3"></i>EDIT</a>
   </div>
   `;
-};
-
-const buildSpanTag = function (type, data = null) {
-  let text = 'This snippet will never expire';
-
-  const formatDMY = (d, m, y) => `${months[m]} ${d}, ${y}`;
-  const formatDMYHMS = (d, m, y, h, min) =>
-    `${formatDMY(d, m, y)} | ${h}:${min}`;
-
-  if (type === 1) {
-    // expires after 1 day
-    const dt = new Date(data);
-    const [d, m, y, h, min] = [
-      dt.getDate(),
-      dt.getMonth(),
-      dt.getFullYear(),
-      dt.getHours(),
-      dt.getMinutes(),
-    ];
-
-    text = `This snippet will expire <b>1</b> day after <b>${formatDMYHMS(
-      d,
-      m,
-      y,
-      h,
-      min
-    )}</b>`;
-  } else if (type === 2) {
-    // expires in given date
-    const dt = new Date(data);
-    const [d, m, y] = [dt.getDate(), dt.getMonth(), dt.getFullYear()];
-
-    text = `This snippet will expire on <b>${formatDMY(d, m, y)}</b>`;
-  }
-
-  return `<span class="text-muted">${text}</span>`;
 };
 
 const buildSnippetDetailMarkup = function (is_other_user, data) {

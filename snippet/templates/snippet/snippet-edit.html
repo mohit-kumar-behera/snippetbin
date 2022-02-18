@@ -28,6 +28,21 @@
         </div>
       </div>
     {% endif %}
+      
+    <div class="url-wrapper border">
+      <h5 class="font-weight-bolder mb-4">Expiration Details</h5>
+      <div class="url-div">
+        <div id="expiration-info-div">           
+          {% if snippet.has_expiry and snippet.expiration_date %}
+            <span class="text-muted">Expires on <b>{{ snippet.expiration_date|date:"M d, Y" }}</b></span>
+          {% elif snippet.has_expiry and not snippet.expiration_date %}
+            <span class="text-muted">Expires 1 day after <b>{{ snippet.created_at|date:"M d, Y  H:i" }}</b></span>
+          {% else %}
+          <span class="text-muted">This snippet will never expire</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
 
     <h4 class="mb-2 mt-5 font-weight-bold">URL</h4>
     <div class="input-group mb-3">

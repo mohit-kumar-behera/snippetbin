@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-$bml1v=y_cqun5&!g1dy0!%bchr2@-t577%6@ffqmpb_v(249$
 # SECURITY WARNING: don't run with debug turned on in production!
 IS_PRODUCTION = True
 
-DEBUG = not IS_PRODUCTION
+DEBUG = IS_PRODUCTION
 
 PRODUCTION_ENDPOINT_URL = 'https://snippetbin.herokuapp.com'
 PRODUCTION_URL_DOMAIN = re.sub('https?://', '', PRODUCTION_ENDPOINT_URL)
