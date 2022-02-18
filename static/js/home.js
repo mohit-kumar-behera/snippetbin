@@ -111,7 +111,7 @@ const showContent = function (data) {
 };
 
 const showLoadMoreBtn = function (data_len) {
-  if (data_len < 6) return;
+  if (data_len < RES_PER_PAGE) return;
   const markup = buildLoadMoreButton();
   loadMoreDiv.innerHTML = '';
   loadMoreDiv.insertAdjacentHTML('afterbegin', markup);
