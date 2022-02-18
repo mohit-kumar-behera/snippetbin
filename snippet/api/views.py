@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.urls import reverse
 from django.db import transaction
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -46,9 +47,14 @@ def snippet_api_create_view(request):
       response_obj = {'success': False, 'data': {'error': 'Something went wrong'}}
       return Response(response_obj, status = status.HTTP_400_BAD_REQUEST)
     else:
-      original_url = request.build_absolute_uri(reverse('snippet:snippet_detail', args = (snippet_obj.id,)))
+      absolute_path = reverse('snippet:snippet_detail', args = (snippet_obj.id,))
 
-      url = original_url
+      if settings.IS_PRODUCTION:
+        full_path = settings.PRODUCTION_ENDPOINT_URL + absolute_path
+      else:
+        full_path = request.build_absolute_uri(absolute_path)
+
+      url = full_path
       if snippet_is_url:
         url = temp_snippet
 
@@ -58,14 +64,14 @@ def snippet_api_create_view(request):
 
       TinyURL.objects.create(
         snippet = snippet_obj,
-        original_url = original_url,
+        original_url = absolute_path,
         shorten_url = res_data['result']['full_short_link']
       )
       
       serializer = SnippetSerializer(snippet_obj, many = False)
       response_obj = {
         'success': True,
-        'redirect_url': original_url,
+        'redirect_url': absolute_path,
         'data': serializer.data
       }
       return Response(response_obj, status = status.HTTP_201_CREATED)

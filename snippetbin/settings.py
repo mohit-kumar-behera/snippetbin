@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import re
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,10 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$bml1v=y_cqun5&!g1dy0!%bchr2@-t577%6@ffqmpb_v(249$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+IS_PRODUCTION = True
 
-ALLOWED_HOSTS = ['snippetbin.herokuapp.com', '127.0.0.1']
+DEBUG = IS_PRODUCTION
 
+PRODUCTION_ENDPOINT_URL = 'https://snippetbin.herokuapp.com'
+PRODUCTION_URL_DOMAIN = re.sub('https?://', '', PRODUCTION_ENDPOINT_URL)
+
+ALLOWED_HOSTS = [PRODUCTION_URL_DOMAIN, '127.0.0.1']
 
 # Application definition
 
@@ -39,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # own apps
     'account',
     'home',
     'snippet',
 
+    # third-party apps
     'rest_framework',
     'corsheaders',
 ]
