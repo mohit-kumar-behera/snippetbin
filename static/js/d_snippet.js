@@ -6,6 +6,20 @@ import {
 } from './module/helper.js';
 
 const snippetDetailWrapper = document.querySelector('.snippet-detail-div');
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 const buildDecryptInputElem = function () {
   return `
@@ -24,6 +38,42 @@ const buildEditButton = function (url) {
     <a href="${url.original_url}edit" class="btn btn-primary w-50" style="font-size:1.1rem"><i class="fa fa-pencil mr-3"></i>EDIT</a>
   </div>
   `;
+};
+
+const buildSpanTag = function (type, data = null) {
+  let text = 'This snippet will never expire';
+
+  const formatDMY = (d, m, y) => `${months[m]} ${d}, ${y}`;
+  const formatDMYHMS = (d, m, y, h, min) =>
+    `${formatDMY(d, m, y)} | ${h}:${min}`;
+
+  if (type === 1) {
+    // expires after 1 day
+    const dt = new Date(data);
+    const [d, m, y, h, min] = [
+      dt.getDate(),
+      dt.getMonth(),
+      dt.getFullYear(),
+      dt.getHours(),
+      dt.getMinutes(),
+    ];
+
+    text = `This snippet will expire <b>1</b> day after <b>${formatDMYHMS(
+      d,
+      m,
+      y,
+      h,
+      min
+    )}</b>`;
+  } else if (type === 2) {
+    // expires in given date
+    const dt = new Date(data);
+    const [d, m, y] = [dt.getDate(), dt.getMonth(), dt.getFullYear()];
+
+    text = `This snippet will expire on <b>${formatDMY(d, m, y)}</b>`;
+  }
+
+  return `<span class="text-muted">${text}</span>`;
 };
 
 const buildSnippetDetailMarkup = function (is_other_user, data) {
@@ -68,6 +118,21 @@ const buildSnippetDetailMarkup = function (is_other_user, data) {
     </div>
   </div>
 
+  <div class="url-wrapper border">
+    <h5 class="font-weight-bolder mb-4">Expiration Details</h5>
+    <div class="url-div">
+      <div>
+        ${
+          data.has_expiry
+            ? data.expiration_date
+              ? buildSpanTag(2, data.expiration_date)
+              : buildSpanTag(1, data.created_at)
+            : buildSpanTag(0)
+        }
+      </div>
+    </div>
+  </div>
+
   ${is_other_user ? '' : buildEditButton(data.urls)}
 
   <div class="snippet-action-div text-center mt-5">
@@ -96,6 +161,7 @@ const showError = function (err) {
 const showContent = function (data) {
   const is_other_user = data.is_other_user;
   const res_data = data.data;
+
   const markup = buildSnippetDetailMarkup(is_other_user, res_data);
   snippetDetailWrapper.innerHTML = '';
   snippetDetailWrapper.insertAdjacentHTML('afterbegin', markup);
