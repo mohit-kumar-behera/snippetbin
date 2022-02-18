@@ -102,12 +102,16 @@ const handlerLoadMoreSnippets = async function (e) {
 };
 
 const showContent = function (data) {
-  const markup = buildSnippetsMarkup(data);
+  let markup = '';
+  if (!data.length)
+    markup = '<h4 class="text-muted">Currently there are no snippets</h4>';
+  else markup = buildSnippetsMarkup(data);
   snippetsWrapper.innerHTML = '';
   snippetsWrapper.insertAdjacentHTML('afterbegin', markup);
 };
 
-const showLoadMoreBtn = function () {
+const showLoadMoreBtn = function (data_len) {
+  if (data_len < 6) return;
   const markup = buildLoadMoreButton();
   loadMoreDiv.innerHTML = '';
   loadMoreDiv.insertAdjacentHTML('afterbegin', markup);
@@ -123,7 +127,7 @@ const fetchSnippetList = async function () {
   const response = await fetchList();
 
   showContent(response.data);
-  showLoadMoreBtn();
+  showLoadMoreBtn(response.data.length);
 };
 
 fetchSnippetList();

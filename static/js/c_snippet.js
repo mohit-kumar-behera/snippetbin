@@ -37,7 +37,8 @@ const handleCreateSnippetForm = async function (data) {
     removeLoader(formSubmitBtn, '<span>CREATE NEW SNIPPET</span>');
   }
 
-  if (!response.success) return alert('Something went wrong');
+  if (!response || !response.success)
+    return alert('Something went wrong. Please try after some time');
 
   window.location.href = response.redirect_url;
 };
