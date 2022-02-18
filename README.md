@@ -28,41 +28,41 @@ This application is provided with features like -
 
 ### Project Deployment Link - [snippetbin.herokuapp.com](https://snippetbin.herokuapp.com)
 
-### Video Demo Link - [vimeo.com/678863694](https://vimeo.com/678863694)
+### Video Demo Link - [vimeo.com/679259895](https://vimeo.com/679259895)
 
 ### NOTE:
 
 **This website is not mobile-friendly as the UI is not responsive for smaller screens. It will work perfectly on desktop**
 
-## MORE IMAGES
+## IMAGES OF APPLICATION
 
 ### SnippetBin Signup Page
 
-![SnippetBin Signup Page](demo_images/signup.png)
+![SnippetBin Signup Page](demo_images/signup.png) <br /> <br /> <br /> <br />
 
 ### SnippetBin Dashboard Page
 
-![SnippetBin Dashboard Page](demo_images/user.png)
+![SnippetBin Dashboard Page](demo_images/user.png) <br /> <br /> <br /> <br />
 
 ### Snippet Detail Page
 
-![Snippet Detail Page](demo_images/snipper_detail.png)
+![Snippet Detail Page](demo_images/snippet_detail.png) <br /> <br /> <br /> <br />
 
 ### Snippet Statistics Page
 
-![Snippet Statistics Page](demo_images/stats.png)
+![Snippet Statistics Page](demo_images/stats.png) <br /> <br /> <br /> <br />
 
 ### SnippetBin Create Snippet Page
 
-![SnippetBin Create Snippet Page](demo_images/createsnippet.png)
+![SnippetBin Create Snippet Page](demo_images/createsnippet.png) <br /> <br /> <br /> <br />
 
 ### Edit snippet expiration date
 
-![Edit snippet expiration date](demo_images/edit.png)
+![Edit snippet expiration date](demo_images/edit.png) <br /> <br /> <br /> <br />
 
 ### Encrypted Snippet content
 
-![Encrypted Snippet content](demo_images/encrypted.png)
+![Encrypted Snippet content](demo_images/encrypted.png) <br /> <br /> <br /> <br />
 
 ### SnippetBin Login Page
 
