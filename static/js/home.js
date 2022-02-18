@@ -96,7 +96,7 @@ const handlerLoadMoreSnippets = async function (e) {
     await wait(0.5);
     removeLoader(btn, '<span>LOAD MORE</span>');
   } else {
-    await wait(1);
+    await wait(0.7);
     btn.remove();
   }
 };
