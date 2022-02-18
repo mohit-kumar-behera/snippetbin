@@ -24,7 +24,7 @@ This application is provided with features like -
 
 ### Tech Stack/ framework used
 
-`Django` `Python` `HTML` `CSS` `Javascript` `Bootstrap` `Django REST Framework`
+`Django` `Python` `HTML` `CSS` `Javascript` `Bootstrap` `SQL` `Django REST Framework`
 
 ### Project Deployment Link - [snippetbin.herokuapp.com](https://snippetbin.herokuapp.com)
 
